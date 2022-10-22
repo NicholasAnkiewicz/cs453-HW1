@@ -36,7 +36,7 @@ for line in input_lines:
         except socket.timeout:
             d = d * 2
             print("Request timed out: resending")
-        finally:
+        else:
             sys.exit(signal.SIGINT)
             
             
