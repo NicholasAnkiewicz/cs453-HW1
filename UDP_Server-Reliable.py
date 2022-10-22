@@ -9,6 +9,26 @@ try:
         data, c_address = s.recvfrom(1024)
         data = data.decode()
         print(data)
+        data = data.split(" ")
+        if len(data) != 3 or len(data[0]) != 1:
+            data = "-1"
+        elif ((["+", "-", "*", "/"].count(data[0]) == 0)):
+            data = 620
+        elif (not data[1].strip("-").isdigit()):
+            data = 630
+        elif (not data[2].strip("-").isdigit()):
+            data = 630
+        elif (data[2] == "0" and data[0] == "/"):
+            data = 630
+        else:
+            if (data[0] == "+"):
+                data = int(data[1]) + int(data[2])            
+            elif data[0] == "-":
+                data = int(data[1]) - int(data[2])
+            elif data[0] == "*":
+                data = int(data[1]) * int(data[2])
+            elif data[0] == "/":
+                data = int(data[1]) / int(data[2])
         s.sendto(str(data).encode(), c_address)
 
 except KeyboardInterrupt:
