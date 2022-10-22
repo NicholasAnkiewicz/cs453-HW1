@@ -19,10 +19,11 @@ s.settimeout(d)
 for line in input_lines:
     line = line.strip('\n')
     while True:
-        if d > 2:
-            raise TimeoutError
+        
         s.sendto((line).encode(), ("127.0.0.1", 65444))
         try:
+            if d > 2:
+                raise TimeoutError("Request timed out: the server is dead")
             data, s_address = s.recvfrom(1024)
             data = data.decode()
             data = data.split(" ")
@@ -35,6 +36,7 @@ for line in input_lines:
         except socket.timeout:
             d = d * 2
             print("Request timed out: resending")
-        else:
-            print("Request timed out: the server is dead")
+        finally:
+            sys.exit(signal.SIGINT)
+            
             
