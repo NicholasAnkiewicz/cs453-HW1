@@ -1,5 +1,6 @@
 from cmath import exp
 from logging import exception
+import signal
 import socket
 import os
 import sys
@@ -17,16 +18,19 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(d)
 for line in input_lines:
     line = line.strip('\n')
-    while d < 2:
-        s.sendto((line).encode(), ("127.0.0.1", 65444))
-        data, s_address = s.recvfrom(1024)
-        if not data:
+    data = None
+    while data != None:
+        try:
+            s.sendto((line).encode(), ("127.0.0.1", 65444))
+            data, s_address = s.recvfrom(1024)
+        except socket.timeout:
             if d > 2:
-                raise exception("Request timed out: the server is dead")    
+                raise exception("Request timed out: the server is dead")
             d = d * 2
             print("Request timed out: resending")
-        else:
-            break
+        except:
+            s.close()
+            sys.exit(signal.SIGINT)
     data = data.decode()
     data = data.split(" ")
     if data[0] == "200":
