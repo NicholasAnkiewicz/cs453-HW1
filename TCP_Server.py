@@ -1,6 +1,6 @@
 import socket
 import sys
-
+import signal
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,6 +40,5 @@ try:
 
 except KeyboardInterrupt:
     s.close()
-    c_sock.close()
-    sys.exit(0)
+    sys.exit(signal.SIGINT)
         
