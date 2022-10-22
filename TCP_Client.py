@@ -4,7 +4,7 @@ import sys
 
 
 curDirectory = os.path.dirname(__file__)
-fullPath = os.path.join(curDirectory, sys.argv[-1])
+fullPath = os.path.join(curDirectory, sys.argv[1])
 input_lines = []
 with open(fullPath, 'r') as file:
     for line in file:
