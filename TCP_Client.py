@@ -1,8 +1,10 @@
 import socket
 import os
+import sys
+
 
 curDirectory = os.path.dirname(__file__)
-fullPath = os.path.join(curDirectory, "sample_data.txt")
+fullPath = os.path.join(curDirectory, sys.argv[-1])
 input_lines = []
 with open(fullPath, 'r') as file:
     for line in file:
@@ -17,8 +19,8 @@ for line in input_lines:
     data = data.decode()
     data = data.split(" ")
     if data[0] == "200":
-        print("Result is ", data[1])
+        print("Result is", data[1])
     if data[0] == "620":
-        print("Error ", data[0], ": Invalid OC")
+        print(f"Error {data[0]}: Invalid OC")
     if data[0] == "630":
-        print("Error ", data[0], ": Invalid operands")
+        print(f"Error {data[0]}: Invalid operands")

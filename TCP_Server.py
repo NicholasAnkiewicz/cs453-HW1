@@ -7,7 +7,6 @@ try:
     s.bind(("127.0.0.1", 65444))
     s.listen(5)
     c_sock, c_address = s.accept()
-    print("Connected: ", c_address)
     while True:
         recieved = c_sock.recv(1024)
         if not recieved:
@@ -33,7 +32,7 @@ try:
             elif data[0] == "/":
                 data = int(data[1]) / int(data[2])
             data = "200 " + str(data)
-        print(recieved, "->", data)
+        print(recieved.decode(), "->", data)
         c_sock.sendall(str(data).encode())
     s.close()
 
