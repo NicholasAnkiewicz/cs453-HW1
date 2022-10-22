@@ -10,7 +10,7 @@ try:
     s.bind(("127.0.0.1", 65444))
     while True:
         recieved, c_address = s.recvfrom(1024)
-        if random.random() <= p:
+        if random.random() <= int(p):
             print(f"{recieved.decode()} -> dropped")
         data = recieved.decode()
         data = data.split(" ")
