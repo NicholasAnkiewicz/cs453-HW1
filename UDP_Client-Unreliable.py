@@ -18,8 +18,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(d)
 for line in input_lines:
     line = line.strip('\n')
-    data = None
-    while data != None:
+    while True:
         s.sendto((line).encode(), ("127.0.0.1", 65444))
         try:
             data, s_address = s.recvfrom(1024)
