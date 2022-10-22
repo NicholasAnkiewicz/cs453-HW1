@@ -19,8 +19,8 @@ for line in input_lines:
     
     while d < 2:
         s.sendto((line).encode(), ("127.0.0.1", 65444))
-        time.sleep(d)
         data, s_address = s.recvfrom(1024)
+        time.sleep(d)
         if data:
             if d > 2:
                 raise exception("Request timed out: the server is dead")    
