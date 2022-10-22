@@ -14,14 +14,12 @@ with open(fullPath, 'r') as file:
 
 d=0.1
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.setblocking(0)
+s.settimeout(d)
 for line in input_lines:
     line = line.strip('\n')
-
     while d < 2:
         s.sendto((line).encode(), ("127.0.0.1", 65444))
         data, s_address = s.recvfrom(1024)
-        time.sleep(d)
         if not data:
             if d > 2:
                 raise exception("Request timed out: the server is dead")    
@@ -29,7 +27,6 @@ for line in input_lines:
             print("Request timed out: resending")
         else:
             break
-    
     data = data.decode()
     data = data.split(" ")
     if data[0] == "200":
