@@ -5,7 +5,7 @@ import signal
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(("127.0.0.1", 65444))
-    s.listen()
+    s.listen(5)
     c_sock, c_address = s.accept()
     print("Connected: ", c_address)
     while True:
