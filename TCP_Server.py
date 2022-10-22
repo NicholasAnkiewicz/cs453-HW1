@@ -36,7 +36,7 @@ try:
         c_sock.sendall(str(data).encode())
     s.close()
 
-except:
+except KeyboardInterrupt:
     s.close()
     c_sock.close()
     exit(0)
