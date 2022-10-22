@@ -39,5 +39,5 @@ try:
 except:
     s.close()
     c_sock.close()
-
+    exit(0)
         
