@@ -20,7 +20,7 @@ for line in input_lines:
     line = line.strip('\n')
     while True:
         if d > 2:
-            raise exception
+            raise TimeoutError
         s.sendto((line).encode(), ("127.0.0.1", 65444))
         try:
             data, s_address = s.recvfrom(1024)
