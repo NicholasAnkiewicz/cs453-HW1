@@ -11,7 +11,6 @@ with open(fullPath, 'r') as file:
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 for line in input_lines:
     line = line.strip('\n')
-    print("Sending ", line, "to 127.0.0.1")
     s.sendto((line).encode(), ("127.0.0.1", 65444))
     data, s_address = s.recvfrom(1024)
     data = data.decode()
