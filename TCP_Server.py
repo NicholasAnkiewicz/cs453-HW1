@@ -9,23 +9,20 @@ try:
     c_sock, c_address = s.accept()
     print("Connected: ", c_address)
     while True:
-        data = c_sock.recv(1024)
-        if not data:
+        recieved = c_sock.recv(1024)
+        if not recieved:
             c_sock.close()
             break
-        data = data.decode()
-        print(data)
+        data = recieved.decode()
         data = data.split(" ")
-        if len(data) != 3 or len(data[0]) != 1:
-            data = "-1"
-        elif ((["+", "-", "*", "/"].count(data[0]) == 0)):
-            data = 620
+        if ((["+", "-", "*", "/"].count(data[0]) == 0)):
+            data = "620 -1"
         elif (not data[1].strip("-").isdigit()):
-            data = 630
+            data = "630 -1"
         elif (not data[2].strip("-").isdigit()):
-            data = 630
+            data = "630 -1"
         elif (data[2] == "0" and data[0] == "/"):
-            data = 630
+            data = "630 -1"
         else:
             if (data[0] == "+"):
                 data = int(data[1]) + int(data[2])            
@@ -35,6 +32,8 @@ try:
                 data = int(data[1]) * int(data[2])
             elif data[0] == "/":
                 data = int(data[1]) / int(data[2])
+            data = "200 " + str(data)
+        print(recieved, "->", data)
         c_sock.sendall(str(data).encode())
     s.close()
 

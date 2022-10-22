@@ -16,4 +16,10 @@ for line in input_lines:
     s.sendall((line).encode())
     data = s.recv(1024)
     data = data.decode()
-    print(data)
+    data = data.split(" ")
+    if data[0] == "200":
+        print("Result is ", data[1])
+    if data[0] == "620":
+        print("Error ", data[0], ": Invalid OC")
+    if data[0] == "630":
+        print("Error ", data[0], ": Invalid operands")
