@@ -27,7 +27,7 @@ try:
             elif data[0] == "/":
                 data = int(data[1]) / int(data[2])
             data = "200 " + str(data)
-        print(recieved, "->", data)
+        print(recieved.decode(), "->", data)
         s.sendto(str(data).encode(), c_address)
 
 except KeyboardInterrupt:
