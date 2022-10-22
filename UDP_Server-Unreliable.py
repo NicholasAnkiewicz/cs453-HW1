@@ -12,6 +12,7 @@ try:
         recieved, c_address = s.recvfrom(1024)
         if random.random() <= int(p):
             print(f"{recieved.decode()} -> dropped")
+            pass
         data = recieved.decode()
         data = data.split(" ")
         if ((["+", "-", "*", "/"].count(data[0]) == 0)):
