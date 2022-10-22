@@ -20,9 +20,17 @@ for line in input_lines:
     line = line.strip('\n')
     data = None
     while data != None:
+        s.sendto((line).encode(), ("127.0.0.1", 65444))
         try:
-            s.sendto((line).encode(), ("127.0.0.1", 65444))
             data, s_address = s.recvfrom(1024)
+            data = data.decode()
+            data = data.split(" ")
+            if data[0] == "200":
+                print("Result is",data[1])
+            if data[0] == "620":
+                print(f"Error {data[0]}: Invalid OC")
+            if data[0] == "630":
+                print(f"Error {data[0]}: Invalid operands")
         except socket.timeout:
             if d > 2:
                 raise exception("Request timed out: the server is dead")
@@ -31,11 +39,4 @@ for line in input_lines:
         except:
             s.close()
             sys.exit(signal.SIGINT)
-    data = data.decode()
-    data = data.split(" ")
-    if data[0] == "200":
-        print("Result is",data[1])
-    if data[0] == "620":
-        print(f"Error {data[0]}: Invalid OC")
-    if data[0] == "630":
-        print(f"Error {data[0]}: Invalid operands")
+    
