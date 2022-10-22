@@ -24,17 +24,14 @@ while True:
     elif (data[2] == "0" and data[0] == "/"):
         data = 630
     else:
-        data[1] = int(data[1])
-        data[2] = int(data[2])
-        match data[0]:
-            case "+":
-                data = data[1] + data[2]
-            case "-":
-                data = data[1] - data[2]
-            case "*":
-                data = data[1] * data[2]
-            case "/":
-                data = data[1] / data[2]
+        if (data[0] == "+"):
+            data = int(data[1]) + int(data[2])            
+        elif data[0] == "-":
+            data = int(data[1]) - int(data[2])
+        elif data[0] == "*":
+            data = int(data[1]) * int(data[2])
+        elif data[0] == "/":
+            data = int(data[1]) / int(data[2])
     c_sock.sendall(str(data).encode())
 s.close()
 
