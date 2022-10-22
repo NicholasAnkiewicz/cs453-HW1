@@ -1,11 +1,9 @@
-from cmath import exp
-from logging import exception
 import signal
 import socket
 import os
 import sys
-import time
 
+sys.tracebacklimit = 0
 curDirectory = os.path.dirname(__file__)
 fullPath = os.path.join(curDirectory, sys.argv[1])
 input_lines = []
